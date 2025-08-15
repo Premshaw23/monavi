@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Heart,
   Mail,
@@ -8,7 +9,7 @@ import {
   MapPin,
   Linkedin,
   Twitter,
-  Facebook,
+  Instagram,
 } from "lucide-react";
 
 export function Footer() {
@@ -28,6 +29,15 @@ export function Footer() {
       transition: { duration: 0.6, ease: "easeOut" },
     },
   };
+
+  const quickLinks = [
+    { name: "Home", href: "#home" },
+    { name: "Features", href: "#features" },
+    { name: "About", href: "#about" },
+    { name: "Contact", href: "#contact" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms of Service", href: "/terms-of-service" },
+  ];
 
   return (
     <footer className="bg-[#1a365d] text-white">
@@ -54,13 +64,21 @@ export function Footer() {
             </p>
             <div className="flex space-x-3 sm:space-x-4">
               {[
-                { icon: Facebook, href: "#" },
-                { icon: Twitter, href: "#" },
-                { icon: Linkedin, href: "#" },
+                {
+                  icon: Instagram,
+                  href: "https://www.instagram.com/monavimed",
+                },
+                { icon: Twitter, href: "https://x.com/MonaviMed" },
+                {
+                  icon: Linkedin,
+                  href: "https://www.linkedin.com/company/monavimed",
+                },
               ].map((social, index) => (
                 <motion.a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-teal-500 transition-colors duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -77,22 +95,32 @@ export function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base">
-              {[
-                "Home",
-                "Features",
-                "About",
-                "Contact",
-                "Privacy Policy",
-                "Terms of Service",
-              ].map((link, index) => (
+              {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <motion.a
-                    href="#"
-                    className="text-gray-300 hover:text-teal-400 transition-colors duration-300"
-                    whileHover={{ x: 3 }}
-                  >
-                    {link}
-                  </motion.a>
+                  {link.href.startsWith("/") ? (
+                    // Redirect to pages
+                    <Link
+                      href={link.href}
+                      className="text-gray-300 hover:text-teal-400 transition-colors duration-300"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    // Scroll to section
+                    <motion.button
+                      onClick={() => {
+                        const section = document.getElementById(
+                          link.href.replace("#", "")
+                        );
+                        if (section)
+                          section.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      className="text-gray-300 hover:text-teal-400 transition-colors duration-300 text-left"
+                      whileHover={{ x: 3 }}
+                    >
+                      {link.name}
+                    </motion.button>
+                  )}
                 </li>
               ))}
             </ul>
@@ -106,18 +134,18 @@ export function Footer() {
             <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
               <div className="flex items-center space-x-2 sm:space-x-3">
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400" />
-                <span className="text-gray-300">hello@monavi.com</span>
+                <span className="text-gray-300">monavimed@gmail.com</span>
               </div>
               <div className="flex items-center space-x-2 sm:space-x-3">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
+                <span className="text-gray-300">+91 7597733862</span>
               </div>
               <div className="flex items-start space-x-2 sm:space-x-3">
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400 mt-1" />
                 <span className="text-gray-300">
-                  123 Healthcare Ave
+                  Anant Apartment Kamala Nagar
                   <br />
-                  Medical District, CA 90210
+                  Bhopal, Madhya Pradesh 462003, India
                 </span>
               </div>
             </div>

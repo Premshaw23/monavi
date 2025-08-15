@@ -1,10 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export function AboutSection() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleJoinClick = () => setShowModal(true);
+
+  const handleOptionClick = () => {
+    setShowModal(false);
+    const section = document.getElementById("contact");
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
       id="about"
@@ -57,7 +68,6 @@ export function AboutSection() {
                       width={200}
                       height={200}
                       alt="Monavi"
-                      
                     />
                   </motion.div>
                   <motion.h3
@@ -134,7 +144,10 @@ export function AboutSection() {
               transition={{ duration: 0.6, delay: 1 }}
               viewport={{ once: true }}
             >
-              <Button className="bg-gradient-to-r from-teal-600 to-teal-800 hover:from-teal-700 hover:to-teal-900 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button
+                className="bg-gradient-to-r cursor-pointer from-teal-600 to-teal-800 hover:from-teal-700 hover:to-teal-900 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                onClick={handleJoinClick}
+              >
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -146,6 +159,46 @@ export function AboutSection() {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl"
+          >
+            <h3 className="text-2xl font-bold mb-6 text-slate-800">
+              Join Monavi
+            </h3>
+            <p className="text-slate-600 mb-6">
+              Choose how you’d like to get involved:
+            </p>
+            <div className="flex flex-col gap-4">
+              <Button
+                className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-full font-semibold shadow"
+                onClick={handleOptionClick}
+              >
+                Employee / Intern
+              </Button>
+              <Button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold shadow"
+                onClick={handleOptionClick}
+              >
+                Investor
+              </Button>
+            </div>
+            <button
+              className="mt-6 text-gray-500 hover:text-gray-700"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 }

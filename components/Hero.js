@@ -48,7 +48,7 @@ export function HeroSection() {
           </motion.div>
 
           {/* Two-line Heading with Glow */}
-          <div className="relative space-y-4">
+          <div className="relative space-y-4 mb-5">
             {/* Glow Layer */}
             <span className="absolute -inset-1 bg-gradient-to-r from-teal-400 via-teal-200 to-teal-400 opacity-30 rounded-2xl blur-3xl z-0"></span>
 
@@ -78,7 +78,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="relative max-w-full sm:max-w-xl"
+            className="relative max-w-full sm:max-w-2xl"
           >
             {/* Glow Layer */}
             <span className="absolute -inset-2 bg-gradient-to-r from-teal-400 via-teal-200 to-teal-400 opacity-20 rounded-2xl blur-3xl z-0"></span>
@@ -94,12 +94,12 @@ export function HeroSection() {
           </motion.div>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-8 mt-7">
+          <div className="flex flex-col sm:flex-row gap-12 mt-7">
             {/* Primary Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative inline-flex items-center justify-center px-6 sm:px-10 py-3 rounded-xl font-semibold text-white overflow-hidden group"
+              className="relative cursor-pointer inline-flex items-center justify-center px-6 sm:px-10 py-3 rounded-xl font-semibold text-white overflow-hidden group"
             >
               {/* Rotating Gradient */}
               <span className="absolute -inset-1 bg-gradient-to-r from-teal-900 via-teal-600 to-teal-400 rounded-xl blur-xl opacity-50 animate-spin-slow"></span>
@@ -118,7 +118,11 @@ export function HeroSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative inline-flex items-center justify-center px-6 sm:px-10 py-3 rounded-xl font-semibold text-teal-600 border-2 border-transparent overflow-hidden group"
+              onClick={() => {
+                const section = document.getElementById("features");
+                if (section) section.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="relative inline-flex cursor-pointer items-center justify-center px-6 sm:px-10 py-3 rounded-xl font-semibold text-teal-600 border-2 border-transparent overflow-hidden group"
             >
               {/* Gradient Border */}
               <span className="absolute -inset-1 bg-gradient-to-r from-teal-900 via-teal-600 to-teal-400 rounded-xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500"></span>

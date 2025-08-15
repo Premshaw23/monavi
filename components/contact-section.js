@@ -30,20 +30,26 @@ export function ContactSection() {
     {
       icon: Mail,
       title: "Email Us",
-      content: "hello@monavi.com",
+      content: "monavimed@gmail.com",
       description: "Get in touch with our team",
     },
     {
       icon: Phone,
       title: "Call Us",
-      content: "+1 (555) 123-4567",
+      content: "+91 7597733862",
+      description: "Mon-Fri 9AM-6PM PST",
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      content: "+91 7447417740",
       description: "Mon-Fri 9AM-6PM PST",
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      content: "123 Healthcare Ave",
-      description: "Medical District, CA 90210",
+      content: "Anant Apartment Kamala Nagar",
+      description: "Bhopal, Madhya Pradesh 462003, India",
     },
   ];
 
