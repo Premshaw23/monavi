@@ -2,29 +2,51 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Clock, Users, Shield } from "lucide-react";
+import emailjs from "emailjs-com";
+import { toast } from "react-hot-toast";
 
-export function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
+export default function ContactForm() {
+ const [formData, setFormData] = useState({
+   name: "",
+   email: "",
+   company: "",
+   phone: "",
+   subject: "",
+   message: "",
+ });
+ const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+ const handleInputChange = (e) => {
+   setFormData({ ...formData, [e.target.name]: e.target.value });
+ };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission here
-  };
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   setLoading(true);
+
+   try {
+     await emailjs.send(
+       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+       { ...formData },
+       process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+     );
+     toast.success("Message sent successfully!");
+     setFormData({
+       name: "",
+       email: "",
+       company: "",
+       phone: "",
+       subject: "",
+       message: "",
+     });
+   } catch (error) {
+     console.error(error);
+     toast.error("Failed to send message. Try again later.");
+   } finally {
+     setLoading(false);
+   }
+ };
 
   const contactInfo = [
     {
@@ -185,7 +207,7 @@ export function ContactSection() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="+91 9999999999"
                   />
                 </div>
               </div>
@@ -238,15 +260,26 @@ export function ContactSection() {
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-teal-600 text-white py-4 px-6 rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-teal-700 transition-colors duration-200 shadow-lg"
+                disabled={loading}
+                className={`w-full bg-teal-600 text-white py-4 px-6 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors duration-200 shadow-lg ${
+                  loading
+                    ? "cursor-not-allowed opacity-70"
+                    : "hover:bg-teal-700"
+                }`}
               >
-                <Send className="w-5 h-5" />
-                Send Message
+                {loading ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" /> Send Message
+                  </>
+                )}
               </motion.button>
             </form>
           </motion.div>
 
           {/* Contact Info & Features */}
+          {/* ... Keep your existing design for contactInfo and features here ... */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -254,73 +287,70 @@ export function ContactSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="space-y-8"
           >
+            {/* Contact Cards */}
             <div className="space-y-6">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.1 * index }}
-                    whileHover={{ scale: 1.02 }}
-                    className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="bg-teal-100 p-3 rounded-lg">
-                        <Icon className="w-6 h-6 text-teal-600" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-slate-800 mb-1">
-                          {info.title}
-                        </h4>
-                        <p className="text-lg font-medium text-slate-900 mb-1">
-                          {info.content}
-                        </p>
-                        <p className="text-sm text-slate-600">
-                          {info.description}
-                        </p>
-                      </div>
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 * index }}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="bg-teal-100 p-3 rounded-lg">
+                      <info.icon className="w-6 h-6 text-teal-600" />
                     </div>
-                  </motion.div>
-                );
-              })}
+                    <div>
+                      <h4 className="font-semibold text-slate-800 mb-1">
+                        {info.title}
+                      </h4>
+                      <p className="text-lg font-medium text-slate-900 mb-1">
+                        {info.content}
+                      </p>
+                      <p className="text-sm text-slate-600">
+                        {info.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
 
+            {/* Features */}
             <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-8 border border-teal-100">
               <h4 className="text-xl font-bold text-slate-800 mb-6">
                 Why Choose MONAVI?
               </h4>
               <div className="space-y-4">
-                {features.map((feature, index) => {
-                  const Icon = feature.icon;
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.1 * index }}
-                      className="flex items-start gap-3"
-                    >
-                      <div className="bg-teal-600 p-2 rounded-lg">
-                        <Icon className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <h5 className="font-semibold text-slate-800 mb-1">
-                          {feature.title}
-                        </h5>
-                        <p className="text-sm text-slate-600">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                {features.map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 * index }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="bg-teal-600 p-2 rounded-lg">
+                      <feature.icon className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-slate-800 mb-1">
+                        {feature.title}
+                      </h5>
+                      <p className="text-sm text-slate-600">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
+            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
