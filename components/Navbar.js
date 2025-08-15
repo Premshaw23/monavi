@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 export function Header() {
   const navItems = ["Home", "Features", "About", "Contact"];
@@ -34,7 +35,7 @@ export function Header() {
 
     window.addEventListener("scroll", handleScrollActive);
     return () => window.removeEventListener("scroll", handleScrollActive);
-  }, []);
+  }, [navItems]);
 
   const handleLinkClick = (id) => {
     setActive(id);
@@ -67,10 +68,12 @@ export function Header() {
             className="flex items-center space-x-2 cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <img
+            <Image
               src="/logo.png"
               alt="Monavi"
               className="w-10 h-10 rounded-full"
+              width={100}
+              height={100}
             />
             <span className="text-2xl font-bold text-slate-800 tracking-wide">
               MONAVI

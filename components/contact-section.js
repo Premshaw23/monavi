@@ -111,7 +111,7 @@ export default function ContactForm() {
             Get In Touch
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Ready to revolutionize your healthcare practice? Let's discuss how
+            Ready to revolutionize your healthcare practice? Let&apos;s discuss how
             MONAVI can transform your patient care experience.
           </p>
         </motion.div>
@@ -130,7 +130,7 @@ export default function ContactForm() {
                 Send us a message
               </h3>
               <p className="text-slate-600">
-                Fill out the form below and we'll get back to you within 24
+                Fill out the form below and we&apos;ll get back to you within 24
                 hours.
               </p>
             </div>

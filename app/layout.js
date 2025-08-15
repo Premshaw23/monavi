@@ -21,7 +21,6 @@ export const metadata = {
   keywords:
     "Healthcare, Digital Health, Monavi, Doctors, Patient Care, HIPAA, Medical Innovation, Startup, Health Tech",
   author: "Monavi",
-  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({ children }) {
@@ -36,7 +35,6 @@ export default function RootLayout({ children }) {
           <meta name="description" content={metadata.description} />
           <meta name="keywords" content={metadata.keywords} />
           <meta name="author" content={metadata.author} />
-          <meta name="viewport" content={metadata.viewport} />
 
           {/* Open Graph for Social Sharing */}
           <meta property="og:title" content={metadata.title} />
