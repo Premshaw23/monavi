@@ -4,6 +4,8 @@ import { HeroSection } from "@/components/Hero";
 import { FeaturesSection } from "@/components/Feature";
 import { Footer } from "@/components/Footer";
 import ScrollToTop from "@/components/scroll-to-top";
+import { AboutSection } from "@/components/about-section";
+import { ContactSection } from "@/components/contact-section";
 
 export default function HomePage() {
   return (
@@ -12,6 +14,8 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <FeaturesSection />
+        <AboutSection/>
+        <ContactSection/>
       </main>
       <Footer/>
       <ScrollToTop/>

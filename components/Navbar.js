@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -14,22 +12,50 @@ export function Header() {
   // Shadow on scroll
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLinkClick = (item) => {
-    setActive(item);
-    const section = document.getElementById(item.toLowerCase());
-    if (section) section.scrollIntoView({ behavior: "smooth" });
-    setMobileOpen(false); // close mobile menu
+  // Update active link on scroll
+  useEffect(() => {
+    const handleScrollActive = () => {
+      navItems.forEach((item) => {
+        const section = document.getElementById(item.toLowerCase());
+        if (section) {
+          const top = section.getBoundingClientRect().top - 80; // adjust header height
+          const bottom = top + section.offsetHeight;
+          if (top <= 0 && bottom > 0) {
+            setActive(item);
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScrollActive);
+    return () => window.removeEventListener("scroll", handleScrollActive);
+  }, []);
+
+  const handleLinkClick = (id) => {
+    setActive(id);
+
+    const section = document.getElementById(id.toLowerCase());
+    if (section) {
+      const headerOffset = 64; // height of fixed header
+      const elementPosition = section.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+
+    setMobileOpen(false);
   };
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <header
       className={`fixed w-full top-0 z-50 backdrop-blur-md transition-shadow duration-300 ${
         scrolled ? "shadow-lg" : "shadow-sm"
       }`}
@@ -37,52 +63,41 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <motion.div
+          <div
             className="flex items-center space-x-2 cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <div className="w-10 h-10 relative">
-              <Image
-                src="/logo.png"
-                alt="Monavi"
-                fill
-                style={{ objectFit: "contain" }}
-                className="rounded-full"
-              />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Monavi"
+              className="w-10 h-10 rounded-full"
+            />
             <span className="text-2xl font-bold text-slate-800 tracking-wide">
               MONAVI
             </span>
-          </motion.div>
+          </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-8">
             {navItems.map((item, index) => (
-              <motion.a
+              <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 className={`relative text-slate-700 font-medium transition-colors duration-300 hover:text-teal-600 ${
                   active === item ? "text-teal-600" : ""
                 }`}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
-                whileHover={{ scale: 1.1 }}
                 onClick={(e) => {
                   e.preventDefault();
                   handleLinkClick(item);
                 }}
               >
                 {item}
-                {/* Underline */}
                 <span
                   className={`absolute left-0 -bottom-1 h-0.5 bg-teal-600 transition-all duration-300 ${
                     active === item ? "w-full" : "w-0"
                   }`}
                 />
-              </motion.a>
+              </a>
             ))}
           </nav>
 
@@ -104,12 +119,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-white/95 backdrop-blur-sm shadow-lg"
-        >
+        <div className="md:hidden bg-white/95 backdrop-blur-sm shadow-lg">
           <div className="flex flex-col space-y-4 px-6 py-4">
             {navItems.map((item) => (
               <button
@@ -123,8 +133,8 @@ export function Header() {
               </button>
             ))}
           </div>
-        </motion.div>
+        </div>
       )}
-    </motion.header>
+    </header>
   );
 }

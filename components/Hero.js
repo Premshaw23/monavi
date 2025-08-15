@@ -12,7 +12,10 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 py-28 lg:py-32">
+    <section
+      id="home"
+      className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 py-28 lg:py-32"
+    >
       {/* Background particles / gradient overlay */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
