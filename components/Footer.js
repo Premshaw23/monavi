@@ -158,7 +158,7 @@ export function Footer() {
           className="border-t border-white/10 mt-6 pt-4 flex flex-col sm:flex-row justify-between items-center text-sm sm:text-base"
         >
           <p className="text-gray-400 mb-3 sm:mb-0">
-            © {new Date().getFullYear()} MONAVI. All rights reserved.
+            {/* © {new Date().getFullYear()} MONAVI. All rights reserved. */}
           </p>
 
           <div className="flex items-center space-x-2 text-gray-400">

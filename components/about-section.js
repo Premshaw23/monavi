@@ -64,7 +64,7 @@ export function AboutSection() {
                     }}
                   >
                     <Image
-                      src="/logo.png"
+                      src="/monavi_logo_trans.png"
                       width={200}
                       height={200}
                       alt="Monavi"
