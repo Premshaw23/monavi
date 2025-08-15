@@ -4,9 +4,9 @@ import Link from "next/link";
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen m-10  bg-gradient-to-b from-gray-50 to-white text-gray-800 p-6 sm:p-12">
+    <div className="min-h-screen md:m-10 mt-12  bg-gradient-to-b from-gray-50 to-white text-gray-800 p-6 sm:p-12">
       {/* Top Home Button */}
-      <div className="mb-8 ml-16 flex justify-start">
+      <div className="my-4 md:ml-16 flex md:justify-start">
         <Link
           href="/"
           className="px-6 py-2 bg-teal-600 text-white font-semibold rounded-full shadow hover:bg-teal-700 transition"
@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
         </Link>
       </div>
 
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 sm:p-12 border border-gray-200">
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-12 border border-gray-200">
         <h1 className="text-4xl font-bold mb-6 text-teal-700 text-center">
           Privacy Policy
         </h1>
