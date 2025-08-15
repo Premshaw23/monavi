@@ -1,95 +1,139 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Rocket } from "lucide-react";
 import Image from "next/image";
+import { Rocket, Heart } from "lucide-react";
 
 export function HeroSection() {
+  const floatingIcons = [
+    { icon: Rocket, top: "10%", left: "5%", rotate: -15 },
+    { icon: Heart, top: "30%", left: "80%", rotate: 10 },
+    { icon: Rocket, top: "70%", left: "50%", rotate: -5 },
+  ];
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 py-20 mt-10">
-      <div className="max-w-[90rem] mx-auto py-10 px-6 sm:px-12 lg:px-16 flex items-center gap-12">
-        {/* Left Column - 55% */}
-        <div className="flex-1" style={{ flexBasis: "55%" }}>
+    <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 py-28 lg:py-32">
+      {/* Background particles / gradient overlay */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 120, ease: "linear" }}
+          className="absolute w-[400px] h-[400px] bg-gradient-to-r from-teal-300 via-teal-200 to-teal-400 rounded-full opacity-20 top-[-50px] left-[-50px]"
+        />
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ repeat: Infinity, duration: 200, ease: "linear" }}
+          className="absolute w-[500px] h-[500px] bg-gradient-to-r from-teal-500 via-teal-300 to-teal-400 rounded-full opacity-10 bottom-[-100px] right-[-100px]"
+        />
+      </div>
+
+      <div className="relative max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-16 flex flex-col-reverse lg:flex-row items-center gap-y-12 lg:gap-x-20">
+        {/* Left Column */}
+        <div className="flex-1 lg:basis-[55%] flex flex-col gap-6">
           {/* App Coming Soon Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center space-x-2 bg-teal-500 text-white px-5 py-2 rounded-full text-sm font-medium shadow-md mb-6"
+            className="relative inline-flex items-center space-x-2 bg-teal-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-md overflow-hidden max-w-max"
           >
-            <Rocket className="w-4 h-4" />
-            <span>App Coming Soon</span>
+            {/* Shine Effect */}
+            <span className="absolute top-0 left-[-50%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 animate-[shine_1.5s_infinite]"></span>
+
+            <Rocket className="w-4 h-4 relative z-10" />
+            <span className="relative z-10">App Coming Soon</span>
           </motion.div>
 
-          {/* Headings */}
-          <div className="space-y-2">
+          {/* Two-line Heading with Glow */}
+          <div className="relative space-y-4">
+            {/* Glow Layer */}
+            <span className="absolute -inset-1 bg-gradient-to-r from-teal-400 via-teal-200 to-teal-400 opacity-30 rounded-2xl blur-3xl z-0"></span>
+
+            {/* First line */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.7 }}
-              className="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight"
+              className="relative text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#1a365d] leading-snug uppercase z-10"
             >
-              Revolutionizing
+              REVOLUTIONIZING
             </motion.h1>
 
+            {/* Second line */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="text-5xl lg:text-6xl font-extrabold leading-tight bg-gradient-to-r from-teal-800 to-teal-400 text-transparent bg-clip-text"
+              className="relative text-5xl sm:text-6xl lg:text-[3.5rem] font-extrabold leading-snug bg-gradient-to-r from-teal-800 to-teal-400 text-transparent bg-clip-text z-10"
             >
               Healthcare Technology
             </motion.h1>
           </div>
 
-          {/* Description Card */}
+          {/* Glassmorphism Description Card with Glow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="bg-gray-200/20 backdrop-blur-md p-4 rounded-xl shadow-md mt-8 max-w-[40rem]"
+            className="relative max-w-full sm:max-w-xl"
           >
-            <p className="text-lg text-slate-700 leading-relaxed">
-              Monavi is building the future of healthcare with innovative
-              technology solutions that connect patients, doctors, and
-              healthcare providers seamlessly.
-            </p>
+            {/* Glow Layer */}
+            <span className="absolute -inset-2 bg-gradient-to-r from-teal-400 via-teal-200 to-teal-400 opacity-20 rounded-2xl blur-3xl z-0"></span>
+
+            {/* Glass Card */}
+            <div className="relative bg-white/20 backdrop-blur-md px-6 py-3 rounded-2xl shadow-lg border border-white/10 z-10">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+                Monavi is building the future of healthcare with innovative
+                technology solutions that connect patients, doctors, and
+                healthcare providers seamlessly.
+              </p>
+            </div>
           </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 mt-10"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                size="lg"
-                className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Join Waitlist
-              </Button>
-            </motion.div>
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-8 mt-7">
+            {/* Primary Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative inline-flex items-center justify-center px-6 sm:px-10 py-3 rounded-xl font-semibold text-white overflow-hidden group"
+            >
+              {/* Rotating Gradient */}
+              <span className="absolute -inset-1 bg-gradient-to-r from-teal-900 via-teal-600 to-teal-400 rounded-xl blur-xl opacity-50 animate-spin-slow"></span>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 border-slate-300 text-slate-700 hover:border-teal-600 hover:text-teal-600 px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300 bg-transparent"
-              >
-                Learn More
-              </Button>
-            </motion.div>
-          </motion.div>
+              {/* Inner Background */}
+              <span className="absolute inset-0 bg-gradient-to-r from-teal-700 via-teal-600 to-teal-500 rounded-xl transition-all duration-500 group-hover:from-teal-600 group-hover:to-teal-400"></span>
+
+              {/* Shine Effect */}
+              <span className="absolute top-0 left-[-50%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 animate-[shine_1s_infinite]"></span>
+
+              {/* Button Text */}
+              <span className="relative z-10">Join Waitlist</span>
+            </motion.button>
+
+            {/* Outline Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative inline-flex items-center justify-center px-6 sm:px-10 py-3 rounded-xl font-semibold text-teal-600 border-2 border-transparent overflow-hidden group"
+            >
+              {/* Gradient Border */}
+              <span className="absolute -inset-1 bg-gradient-to-r from-teal-900 via-teal-600 to-teal-400 rounded-xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500"></span>
+
+              {/* Inner Background */}
+              <span className="absolute inset-0 bg-white/10 rounded-xl transition-all duration-500"></span>
+
+              {/* Shine Effect */}
+              <span className="absolute top-0 left-[-50%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 animate-[shine_1s_infinite]"></span>
+
+              {/* Text */}
+              <span className="relative z-10">Learn More</span>
+            </motion.button>
+          </div>
         </div>
 
-        {/* Right Column - 45% */}
-        <div
-          className="flex-1 flex justify-center"
-          style={{ flexBasis: "45%" }}
-        >
+        {/* Right Column */}
+        <div className="flex-1 lg:basis-[45%] w-full relative flex justify-center mb-8 lg:mb-0">
           <motion.div
             initial={{ opacity: 0, x: 100, scale: 0.8 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -105,25 +149,41 @@ export function HeroSection() {
               rotate: [0, -1, 1, 0],
               transition: { duration: 0.6 },
             }}
-            className="relative"
+            className="relative w-full max-w-md sm:max-w-lg lg:max-w-lg"
           >
             <motion.div
               animate={{ y: [0, -10, 0] }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
               <Image
                 src="/Banner.png"
                 alt="Monavi"
-                width={700}
-                height={700}
+                width={750}
+                height={750}
                 style={{ objectFit: "cover" }}
-                className="rounded-xl shadow-xl shadow-gray-600"
+                className="rounded-2xl shadow-2xl w-full h-auto"
               />
             </motion.div>
+
+            {/* Floating Icons */}
+            {floatingIcons.map((icon, idx) => {
+              const IconComponent = icon.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  className="absolute w-8 h-8 text-teal-400"
+                  style={{ top: icon.top, left: icon.left }}
+                  animate={{ y: [0, -5, 0], rotate: [0, icon.rotate, 0] }}
+                  transition={{
+                    duration: 3 + idx,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <IconComponent className="w-8 h-8" />
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </div>

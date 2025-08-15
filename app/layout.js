@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,6 +23,42 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Head>
+          {/* Standard favicons */}
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+
+          {/* Apple/iOS */}
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+          {/* Android/Manifest */}
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/android-chrome-192x192.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="512x512"
+            href="/android-chrome-512x512.png"
+          />
+
+          {/* Theme color */}
+          <meta name="theme-color" content="#00bba7" />
+          <link rel="manifest" href="/site.webmanifest"></link>
+        </Head>
         {children}
       </body>
     </html>
