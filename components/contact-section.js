@@ -301,10 +301,10 @@ export default function ContactForm() {
 
           {/* Contact Info & Features */}
           <motion.div
-            initial={{ opacity: 1, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3, delay: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="space-y-8"
           >
             {/* Contact Cards */}
@@ -315,9 +315,9 @@ export default function ContactForm() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.2, delay: 0.1 * index }}
+                  transition={{ duration: 0.6, delay: 0.1 * index }}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-100"
+                  className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300"
                 >
                   <div className="flex items-start gap-4">
                     <div className="bg-teal-100 p-3 rounded-lg">
@@ -338,7 +338,6 @@ export default function ContactForm() {
                 </motion.div>
               ))}
             </div>
-
             {/* Features */}
             <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-5 border border-teal-100">
               <h4 className="text-xl font-bold text-slate-800 mb-4">
