@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import {Typewriter} from "react-simple-typewriter";
 
 export function Header() {
   const navItems = ["Home", "Features", "About", "Contact"];
@@ -65,18 +66,42 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex items-center space-x-3 cursor-pointer px-4 py-2"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
+            {/* Logo */}
             <Image
-              src="/logo.png"
+              src="/monavi_logo_trans.png"
               alt="Monavi"
-              className="w-10 h-10 rounded-full"
+              className="w-8 h-8 rounded-full border border-teal-400 shadow-md"
               width={100}
               height={100}
             />
-            <span className="text-2xl font-bold text-slate-800 tracking-wide">
-              MONAVI
+
+            {/* Banner */}
+            <Image
+              src="/Banner_trans.png"
+              alt="Monavi"
+              className="w-28 h-14 drop-shadow-md"
+              width={100}
+              height={100}
+            />
+
+            {/* Typewriter text */}
+            <span
+              className="text-sm sm:text-lg font-semibold 
+                  bg-gradient-to-r from-teal-400 via-emerald-300 to-cyan-400
+                  bg-clip-text text-transparent tracking-wide whitespace-nowrap drop-shadow-md"
+            >
+              <Typewriter
+                words={["Simplifying Every Step", "Innovating HealthTech"]}
+                loop={true}
+                cursor
+                cursorStyle="|"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={2000}
+              />
             </span>
           </div>
 

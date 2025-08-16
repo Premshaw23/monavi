@@ -1,77 +1,93 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Clock, Users, Shield } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  Linkedin,
+  Send,
+  Clock,
+  Users,
+  Shield,
+} from "lucide-react";
 import emailjs from "emailjs-com";
 import { toast } from "react-hot-toast";
 
 export default function ContactForm() {
- const [formData, setFormData] = useState({
-   name: "",
-   email: "",
-   company: "",
-   phone: "",
-   subject: "",
-   message: "",
- });
- const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
 
- const handleInputChange = (e) => {
-   setFormData({ ...formData, [e.target.name]: e.target.value });
- };
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-   try {
-     await emailjs.send(
-       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-       { ...formData },
-       process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-     );
-     toast.success("Message sent successfully!");
-     setFormData({
-       name: "",
-       email: "",
-       company: "",
-       phone: "",
-       subject: "",
-       message: "",
-     });
-   } catch (error) {
-     console.error(error);
-     toast.error("Failed to send message. Try again later.");
-   } finally {
-     setLoading(false);
-   }
- };
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        { ...formData },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      );
+      toast.success("Message sent successfully!");
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send message. Try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const contactInfo = [
     {
       icon: Mail,
       title: "Email Us",
-      content: "monavimed@gmail.com",
+      content: <span>monavimed@gmail.com</span>,
       description: "Get in touch with our team",
     },
     {
       icon: Phone,
       title: "Call Us",
-      content: "+91 7597733862",
-      description: "Mon-Fri 9AM-6PM PST",
+      content: (
+        <>
+          <span className="block text-[1rem]">+91 7447417740</span>
+          <span className="block text-[1rem]">+91 7597733862</span>
+        </>
+      ),
+      description: "Mon-Fri 9AM-6PM IST",
     },
     {
-      icon: Phone,
-      title: "Call Us",
-      content: "+91 7447417740",
-      description: "Mon-Fri 9AM-6PM PST",
-    },
-    {
-      icon: MapPin,
-      title: "Visit Us",
-      content: "Anant Apartment Kamala Nagar",
-      description: "Bhopal, Madhya Pradesh 462003, India",
+      icon: Linkedin,
+      title: "LinkedIn",
+      content: (
+        <a
+          href="https://www.linkedin.com/company/monavi"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-teal-600 hover:underline"
+        >
+          linkedin.com/company/monavi
+        </a>
+      ),
+      description: "Connect with us on LinkedIn",
     },
   ];
 
@@ -96,7 +112,7 @@ export default function ContactForm() {
   return (
     <section
       id="contact"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-blue-50"
+      className="py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-blue-50"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -110,9 +126,9 @@ export default function ContactForm() {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
             Get In Touch
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Ready to revolutionize your healthcare practice? Let&apos;s discuss how
-            MONAVI can transform your patient care experience.
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+            Ready to revolutionize your healthcare practice? Let&apos;s discuss
+            how MONAVI can transform your patient care experience.
           </p>
         </motion.div>
 
@@ -136,6 +152,7 @@ export default function ContactForm() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name & Email */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -175,6 +192,7 @@ export default function ContactForm() {
                 </div>
               </div>
 
+              {/* Company & Phone */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -212,6 +230,7 @@ export default function ContactForm() {
                 </div>
               </div>
 
+              {/* Subject */}
               <div>
                 <label
                   htmlFor="subject"
@@ -237,6 +256,7 @@ export default function ContactForm() {
                 </select>
               </div>
 
+              {/* Message */}
               <div>
                 <label
                   htmlFor="message"
@@ -256,6 +276,7 @@ export default function ContactForm() {
                 />
               </div>
 
+              {/* Submit Button */}
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02 }}
@@ -279,25 +300,24 @@ export default function ContactForm() {
           </motion.div>
 
           {/* Contact Info & Features */}
-          {/* ... Keep your existing design for contactInfo and features here ... */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 1, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.3, delay: 0 }}
             className="space-y-8"
           >
             {/* Contact Cards */}
-            <div className="space-y-6">
+            <div className="space-y-5">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
+                  transition={{ duration: 0.2, delay: 0.1 * index }}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300"
+                  className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-100"
                 >
                   <div className="flex items-start gap-4">
                     <div className="bg-teal-100 p-3 rounded-lg">
@@ -307,9 +327,9 @@ export default function ContactForm() {
                       <h4 className="font-semibold text-slate-800 mb-1">
                         {info.title}
                       </h4>
-                      <p className="text-lg font-medium text-slate-900 mb-1">
+                      <div className="text-lg font-medium text-slate-900 mb-1">
                         {info.content}
-                      </p>
+                      </div>
                       <p className="text-sm text-slate-600">
                         {info.description}
                       </p>
@@ -320,11 +340,11 @@ export default function ContactForm() {
             </div>
 
             {/* Features */}
-            <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-8 border border-teal-100">
-              <h4 className="text-xl font-bold text-slate-800 mb-6">
+            <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-5 border border-teal-100">
+              <h4 className="text-xl font-bold text-slate-800 mb-4">
                 Why Choose MONAVI?
               </h4>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {features.map((feature, index) => (
                   <motion.div
                     key={index}
@@ -349,28 +369,6 @@ export default function ContactForm() {
                 ))}
               </div>
             </div>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="bg-slate-800 rounded-2xl p-8 text-center text-white"
-            >
-              <h4 className="text-xl font-bold mb-3">Ready to Get Started?</h4>
-              <p className="text-slate-300 mb-6">
-                Join thousands of healthcare providers already using MONAVI to
-                improve patient outcomes.
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-200"
-              >
-                Schedule a Demo
-              </motion.button>
-            </motion.div>
           </motion.div>
         </div>
       </div>

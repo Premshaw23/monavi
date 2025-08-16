@@ -10,6 +10,7 @@ import {
   Linkedin,
   Twitter,
   Instagram,
+  Facebook,
 } from "lucide-react";
 
 export function Footer() {
@@ -62,6 +63,11 @@ export function Footer() {
               that connect patients, doctors, and healthcare providers
               seamlessly.
             </p>
+
+            {/* Social Media Links */}
+            <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
+              Social Media Links
+            </h3>
             <div className="flex space-x-3 sm:space-x-4">
               {[
                 {
@@ -71,6 +77,10 @@ export function Footer() {
                 { icon: Twitter, href: "https://x.com/MonaviMed" },
                 {
                   icon: Linkedin,
+                  href: "https://www.linkedin.com/company/monavimed",
+                },
+                {
+                  icon: Facebook,
                   href: "https://www.linkedin.com/company/monavimed",
                 },
               ].map((social, index) => (
@@ -155,7 +165,7 @@ export function Footer() {
         {/* Bottom Section */}
         <motion.div
           variants={itemVariants}
-          className="border-t border-white/10 mt-6 pt-4 flex flex-col sm:flex-row justify-between items-center text-sm sm:text-base"
+          className="border-t border-white/10 mt-6 pt-4 flex flex-col sm:flex-row justify-center items-center text-sm sm:text-base"
         >
           <p className="text-gray-400 mb-3 sm:mb-0">
             {/* © {new Date().getFullYear()} MONAVI. All rights reserved. */}
@@ -169,7 +179,7 @@ export function Footer() {
             >
               <Heart className="w-4 h-4 text-red-400 fill-current" />
             </motion.div>
-            <span>for better healthcare</span>
+            <span>for better healthcare.</span>
           </div>
         </motion.div>
       </motion.div>

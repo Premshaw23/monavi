@@ -95,8 +95,8 @@ export function FeaturesSection() {
             >
               {/* Icon */}
               <motion.div
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
+                whileHover={{ rotate: [0, 0, 0, 0] }}
+                transition={{ duration: 0.1 }}
                 className={`w-16 h-16 ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}
               >
                 <feature.icon className="w-8 h-8 text-white" />

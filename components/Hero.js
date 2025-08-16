@@ -68,7 +68,7 @@ export function HeroSection() {
             </motion.div>
 
             {/* Floating Icons */}
-            {floatingIcons.map((icon, idx) => {
+            {/* {floatingIcons.map((icon, idx) => {
               const IconComponent = icon.icon;
               return (
                 <motion.div
@@ -85,7 +85,7 @@ export function HeroSection() {
                   <IconComponent className="w-8 h-8" />
                 </motion.div>
               );
-            })}
+            })} */}
           </motion.div>
         </div>
 
@@ -115,7 +115,7 @@ export function HeroSection() {
               REVOLUTIONIZING
             </motion.h1>
             <motion.h1
-              className="relative text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold leading-snug 
+              className="relative text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-extrabold leading-snug 
   bg-gradient-to-r from-teal-800 to-teal-400 text-transparent bg-clip-text z-10"
             >
               Healthcare Technology
@@ -133,7 +133,7 @@ export function HeroSection() {
             <span className="absolute -inset-2 bg-gradient-to-r from-teal-400 via-teal-200 to-teal-400 opacity-20 rounded-2xl blur-3xl z-0"></span>
 
             {/* Glass Card */}
-            <div className="relative bg-white/20 backdrop-blur-md px-6 py-3 rounded-2xl shadow-lg border border-white/10 z-10">
+            <div className="relative py-3 z-10">
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
                 Monavi is building the future of healthcare with innovative
                 technology solutions that connect patients, doctors, and
