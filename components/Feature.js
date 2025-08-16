@@ -88,10 +88,10 @@ export function FeaturesSection() {
               key={feature.title}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
+              transition={{ delay: 0, duration: 0.2 }}
               viewport={{ once: true }}
               whileHover={{ y: -10, scale: 1.02 }}
-              className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300"
+              className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-100"
             >
               {/* Icon */}
               <motion.div
